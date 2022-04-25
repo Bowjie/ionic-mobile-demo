@@ -1,0 +1,8 @@
+{
+  "name": "Sample",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "cf460ac0"
+}
