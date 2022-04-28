@@ -18,17 +18,15 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private storageService: StorageService,
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    // this.checkLoginSession();
+    this.checkLoginSession();
   }
 
   private async checkLoginSession() {
-    const storage: string | undefined = await this.storageService.get(
-      'session'
-    );
+    const storage: string | undefined = await this.storageService.get('session');
 
     if (storage) {
       try {
@@ -38,10 +36,7 @@ export class AppComponent implements OnInit {
         if (now > data.expiry) {
           this.router.navigate(['/login']);
         } else {
-          if (
-            location.pathname === '/' ||
-            location.pathname.includes('login')
-          ) {
+          if (location.pathname === '/' || location.pathname.includes('login')) {
             this.router.navigate(['home']);
           }
           this.setUserLoginDetails(data);
@@ -65,7 +60,7 @@ export class AppComponent implements OnInit {
       },
       () => {
         this.toastService.presentToast('An error occured');
-      }
+      },
     );
   }
 }

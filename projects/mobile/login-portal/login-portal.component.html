@@ -1,5 +1,20 @@
-<ion-content>
+<ion-content [fullscreen]="true">
   <div class="banner">
-    <ion-icon name="chatbox-ellipses"></ion-icon>
+    <section>
+      <div class="ion-text-center">
+        <ion-icon name="chatbox-ellipses"></ion-icon>
+        <h1>Welcome to Sample Chat</h1>
+      </div>
+    </section>
   </div>
 </ion-content>
+<ion-card-content>
+  <section>
+    <ion-input clearInput placeholder="Username or email"></ion-input>
+    <ion-input clearInput placeholder="Password"></ion-input>
+  </section>
+  <section>
+    <ion-button expand="full" color="light" class="ion-margin-top" disabled="true">LOG IN</ion-button>
+    <ion-button expand="full" color="light" class="ion-margin-top">CREATE NEW ACCOUNT</ion-button>
+  </section>
+</ion-card-content>
