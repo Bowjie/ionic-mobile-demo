@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { format } from 'date-fns';
 import { LoginSession } from 'projects/shared/models/login-session';
-import { SharedService } from 'projects/shared/services/shared.service';
-import { StorageService } from 'projects/shared/services/storage.service';
-import { ToastService } from 'projects/shared/services/toast.service';
-import { UserService } from 'projects/shared/services/user.service';
+import { SharedService } from 'projects/shared/services/utils/shared.service';
+import { UserService } from 'projects/shared/services/api/user.service';
+import { StorageService } from 'projects/shared/services/utils/storage.service';
+import { ToastService } from 'projects/shared/services/utils/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private storageService: StorageService,
     private sharedService: SharedService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -26,20 +26,19 @@ export class AppComponent implements OnInit {
   }
 
   private async checkLoginSession() {
-    const storage: string | undefined = await this.storageService.get('session');
+    const storage: LoginSession = await this.storageService.get('session');
 
     if (storage) {
       try {
-        const data: LoginSession = JSON.parse(storage);
         const now = format(new Date(), `yyyy-MM-dd'T'HH:mm:ss`);
 
-        if (now > data.expiry) {
+        if (now > storage.expiry) {
           this.router.navigate(['/login']);
         } else {
           if (location.pathname === '/' || location.pathname.includes('login')) {
             this.router.navigate(['home']);
           }
-          this.setUserLoginDetails(data);
+          this.setUserLoginDetails(storage);
         }
       } catch (error) {
         this.router.navigate(['/login']);
@@ -60,7 +59,7 @@ export class AppComponent implements OnInit {
       },
       () => {
         this.toastService.presentToast('An error occured');
-      },
+      }
     );
   }
 }

@@ -9,7 +9,7 @@ export class StorageService {
 
   constructor(private storage: Storage) {}
 
-  async init() {
+  private async init() {
     if (this._storage) {
       return;
     }
