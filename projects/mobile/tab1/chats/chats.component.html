@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item *ngFor="let chats of chatList" lines="none">
+    <ion-avatar slot="start">
+      <img [src]="chats.avatarUrl" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ chats.name }}</h2>
+      <p>{{ chats.lastSender === 'me' ? 'You: ' + chats.lastChat : chats.lastChat }}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
