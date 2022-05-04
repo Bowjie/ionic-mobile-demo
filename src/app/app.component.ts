@@ -54,7 +54,6 @@ export class AppComponent implements OnInit {
       (result) => {
         if (result && result.data) {
           this.sharedService.userSubject.next(result.data[0]);
-          this.router.navigate(['/home']);
         }
       },
       () => {
