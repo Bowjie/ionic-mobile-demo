@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item *ngFor="let friend of friendList" lines="none">
+    <ion-avatar slot="start" style="position: relative">
+      <img [src]="friend.avatarUrl" />
+      <div *ngIf="friend.isOnline" class="online"></div>
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ friend.name }}</h2>
+    </ion-label>
+  </ion-item>
+</ion-list>
